@@ -57,7 +57,7 @@
 
         EN {
             bindings = <
-&ht TAB Q    &kp W        &kp F         &kp P         &kp B        &kp Y        &kp L          &kp U         &kp Y        &kp SEMICOLON
+&ht TAB Q    &kp W        &kp F         &kp P         &kp B        &kp J        &kp L          &kp U         &kp Y        &kp SEMICOLON
 &hrm LGUI A  &hrm LALT R  &hrm LCTRL S  &hrm LSHFT T  &kp G        &kp M        &hrm RSHFT N   &hrm RCTRL E  &hrm RALT I  &hrm RGUI O
 &kp Z        &kp X        &kp C         &kp D         &kp V        &kp K        &kp H          &kp COMMA     &kp DOT      &kp FSLH
                                         &lt 2 ESC     &kp SPACE    &lt 3 ENTER  &kp BACKSPACE
@@ -66,10 +66,10 @@
 
         RU {
             bindings = <
-&ht GRAVE Q  &kp W  &kp E  &kp R   &kp T     &kp Y   &kp U   &kp I      &kp O    &ht P LEFT_BRACKET
-&kp A        &kp S  &kp D  &kp F   &kp G     &kp H   &kp J   &kp K      &kp L    &kp SEMI
-&kp Z        &kp X  &kp C  &kp V   &kp B     &kp N   &kp M   &kp COMMA  &kp DOT  &ht RIGHT_BRACKET SQT
-                           &trans  &trans    &trans  &trans
+&ht GRAVE Q  &kp W        &kp E         &kp R          &kp T     &kp Y   &kp U         &kp I         &kp O        &ht P LEFT_BRACKET
+&hrm LGUI A  &hrm LALT S  &hrm LCTRL D  &hrm LSHIFT F  &kp G     &kp H   &hrm RSHFT J  &hrm K RCTRL  &hrm RALT L  &hrm RGUI SEMI
+&kp Z        &kp X        &kp C         &kp V          &kp B     &kp N   &kp M         &kp COMMA     &kp DOT      &ht RIGHT_BRACKET SQT
+                                        &trans         &trans    &trans  &trans
             >;
         };
 
