@@ -41,14 +41,18 @@
         compatible = "zmk,combos";
 
         ru-en {
-            bindings = <&tog 1>;
+            bindings = <&lang_switch>;
             key-positions = <14 15>;
             layers = <0 1>;
         };
+    };
 
-        switch {
-            bindings = <&kp LG(SPACE)>;
-            key-positions = <14 15>;
+    macros {
+        lang_switch: lang_switch {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(SPACE) &tog 1>;
+            label = "LANG_SWITCH";
         };
     };
 
