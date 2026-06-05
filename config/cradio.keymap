@@ -45,6 +45,11 @@
             key-positions = <14 15>;
             layers = <0 1>;
         };
+
+        switch {
+            bindings = <&kp LG(SPACE)>;
+            key-positions = <14 15>;
+        };
     };
 
     keymap {
@@ -88,7 +93,7 @@
 
         CONTROL {
             bindings = <
-&sys_reset   &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans       &bt BT_NXT
+&sys_reset   &trans  &trans  &trans  &trans    &trans  &trans  &trans  &sys_reset   &bt BT_NXT
 &bootloader  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans       &bt BT_PRV
 &bootloader  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &bootloader  &bt BT_CLR_ALL
                              &trans  &trans    &trans  &trans
