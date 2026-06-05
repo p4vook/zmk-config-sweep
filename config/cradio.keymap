@@ -61,10 +61,10 @@
 
         EN {
             bindings = <
-&ht TAB Q    &kp W        &kp F         &kp P         &kp B        &kp J        &kp L          &kp U         &kp Y        &kp SEMICOLON
-&hrm LGUI A  &hrm LALT R  &hrm LCTRL S  &hrm LSHFT T  &kp G        &kp M        &hrm RSHFT N   &hrm RCTRL E  &hrm RALT I  &hrm RGUI O
-&kp Z        &kp X        &kp C         &kp D         &kp V        &kp K        &kp H          &kp COMMA     &kp DOT      &kp FSLH
-                                        &lt 2 ESC     &kp SPACE    &lt 3 ENTER  &kp BACKSPACE
+&ht TAB Q    &kp W        &kp F         &kp P         &kp B        &kp J          &kp L         &kp U         &kp Y        &kp SEMICOLON
+&hrm LGUI A  &hrm LALT R  &hrm LCTRL S  &hrm LSHFT T  &kp G        &kp M          &hrm RSHFT N  &hrm RCTRL E  &hrm RALT I  &hrm RGUI O
+&kp Z        &kp X        &kp C         &kp D         &kp V        &kp K          &kp H         &kp COMMA     &kp DOT      &kp FSLH
+                                        &lt 2 ESC     &kp SPACE    &kp BACKSPACE  &lt 3 ENTER
             >;
         };
 
