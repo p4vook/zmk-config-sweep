@@ -42,10 +42,94 @@
 
         ru-en {
             bindings = <&lang_switch>;
-            key-positions = <14 15>;
+            key-positions = <10 20>;
             layers = <0 1>;
         };
-    };
+
+        tab {
+            bindings = <&kp TAB>;
+            key-positions = <0 10>;
+            layers = <0 1>;
+        };
+    
+        zmkopt_0 {
+            bindings = <&kp W>;
+            key-positions = <1 11>;
+            layers = <1>;
+        };
+
+        zmkopt_1 {
+            bindings = <&kp O>;
+            key-positions = <2 12>;
+            layers = <1>;
+        };
+
+        zmkopt_2 {
+            bindings = <&kp RBKT>;
+            key-positions = <17 27>;
+            layers = <1>;
+        };
+
+        zmkopt_3 {
+            bindings = <&kp Q>;
+            key-positions = <1 11>;
+            layers = <0>;
+        };
+
+        zmkopt_4 {
+            bindings = <&kp J>;
+            key-positions = <3 13>;
+            layers = <0>;
+        };
+
+        zmkopt_5 {
+            bindings = <&kp SEMI>;
+            key-positions = <5 15>;
+            layers = <0>;
+        };
+
+        zmkopt_6 {
+            bindings = <&kp EQUAL>;
+            key-positions = <6 16>;
+            layers = <0 1>;
+        };
+
+        zmkopt_7 {
+            bindings = <&kp PIPE>;
+            key-positions = <7 17>;
+            layers = <0>;
+        };
+
+        zmkopt_8 {
+            bindings = <&kp BSLH>;
+            key-positions = <8 18>;
+            layers = <0>;
+        };
+
+        zmkopt_9 {
+            bindings = <&kp HASH>;
+            key-positions = <9 19>;
+            layers = <0>;
+        };
+
+        zmkopt_10 {
+            bindings = <&kp CARET>;
+            key-positions = <15 25>;
+            layers = <0>;
+        };
+
+        zmkopt_11 {
+            bindings = <&kp AMPS>;
+            key-positions = <16 26>;
+            layers = <0>;
+        };
+
+        zmkopt_12 {
+            bindings = <&kp AT>;
+            key-positions = <17 27>;
+            layers = <0>;
+        };
+};
 
     macros {
         lang_switch: lang_switch {
@@ -61,27 +145,27 @@
 
         EN {
             bindings = <
-&ht TAB Q    &kp W        &kp F         &kp P         &kp B        &kp J          &kp L         &kp U         &kp Y        &kp SEMICOLON
-&hrm LGUI A  &hrm LALT R  &hrm LCTRL S  &hrm LSHFT T  &kp G        &kp M          &hrm RSHFT N  &hrm RCTRL E  &hrm RALT I  &hrm RGUI O
-&kp Z        &kp X        &kp C         &kp D         &kp V        &kp K          &kp H         &kp COMMA     &kp DOT      &kp FSLH
+&kp W        &kp B        &kp G         &kp L         &kp M        &kp DOT          &kp LEFT_PARENTHESIS          &kp RIGHT_PARENTHESIS        &kp COMMA        &kp X
+&hrm LGUI R  &hrm LALT N  &hrm LCTRL S  &hrm LSHFT T  &kp D        &kp U          &hrm RSHFT A  &hrm RCTRL E  &hrm RALT I  &hrm RGUI H
+&kp Z        &kp P        &kp C         &kp V         &kp K        &kp MINUS          &kp FSLH         &kp O     &kp Y      &kp F
                                         &lt 2 ESC     &kp SPACE    &kp BACKSPACE  &lt 3 ENTER
             >;
         };
 
         RU {
             bindings = <
-&ht GRAVE Q  &kp W        &kp E         &kp R          &kp T     &kp Y   &kp U         &kp I         &kp O        &ht P LEFT_BRACKET
-&hrm LGUI A  &hrm LALT S  &hrm LCTRL D  &hrm LSHIFT F  &kp G     &kp H   &hrm RSHFT J  &hrm RCTRL K  &hrm RALT L  &hrm RGUI SEMI
-&kp Z        &kp X        &kp C         &kp V          &kp B     &kp N   &kp M         &kp COMMA     &kp DOT      &ht RIGHT_BRACKET SQT
+&ht GRAVE P  &kp COMMA        &kp L         &kp H          &kp U     &kp DOT   &kp E         &kp F         &kp G        &ht P M
+&hrm LGUI C  &hrm LALT N  &hrm LCTRL R  &hrm LSHIFT Y  &kp V     &kp Q   &hrm RSHFT T  &hrm RCTRL J  &hrm RALT D  &hrm RGUI B
+&kp I        &kp LEFT_BRACKET        &kp X         &kp K          &kp SEMI     &kp GRAVE   &kp Z         &kp S     &kp A      &ht RIGHT_BRACKET SQT
                                         &trans         &trans    &trans  &trans
             >;
         };
 
         SYM {
             bindings = <
-&kp TILDE        &kp AT      &kp LBRC              &kp RBRC               &kp PIPE             &kp BSLH       &kp LBKT   &kp RBKT   &kp CARET     &kp LS(UNDERSCORE)
-&kp EXCLAMATION  &kp HASH    &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp DOUBLE_QUOTES    &kp PLUS       &kp MINUS  &kp STAR   &kp FSLH      &kp EQUAL
-&kp PERCENT      &kp DOLLAR  &kp LESS_THAN         &kp GREATER_THAN       &kp GRAVE            &kp AMPERSAND  &kp SEMI   &kp COLON  &kp QUESTION  &kp DOT
+&none        &none      &kp LBRC              &kp RBRC               &none             &kp DOT       &kp LEFT_PARENTHESIS    &kp RIGHT_PARENTHESIS  &kp COMMA     &kp DOLLAR
+&hrm LGUI LBKT  &hrm LALT RBKT  &hrm LCTRL PERCENT  &hrm LSHFT DOUBLE_QUOTES  &kp GRAVE    &kp COLON       &hrm RSHFT LS(UNDERSCORE)  &hrm RCTRL STAR  &hrm RALT QUESTION  &hrm RGUI SQT
+&kp SEMI      &none  &kp EXCLAMATION         &kp TILDE       &kp DOT            &kp MINUS  &kp FSLH   &kp PLUS  &kp LESS_THAN     &kp GREATER_THAN
                                                    &trans                 &trans               &trans         &trans
             >;
         };
