@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ferris Sweep — ZMK Layout Cheatsheet</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #171a23;
+    --surface-border: #252a3a;
+    --key-bg: #1e2230;
+    --key-border: #31384f;
+    --key-empty-bg: #141720;
+    --key-empty-border: #202535;
+    --key-held-bg: #2b3556;
+    --key-held-border: #5c7cfa;
+    --text: #e6eaf5;
+    --text-muted: #7c86a3;
+    --text-dim: #464e66;
+    --accent-en: #6ea8fe;
+    --accent-ru: #c084fc;
+    --accent-sym: #4ade80;
+    --accent-sym-ru: #2dd4bf;
+    --accent-nav: #fbbf24;
+    --accent-ctrl: #f87171;
+    --combo-bg: #262e45;
+    --combo-border: #5a72b8;
+    --combo-text: #a9c6ff;
+    --combo-shared-bg: #1d3632;
+    --combo-shared-border: #34d399;
+    --combo-shared-text: #6ee7b7;
+    --mod-gui: #f472b6;
+    --mod-alt: #38bdf8;
+    --mod-ctrl: #fbbf24;
+    --mod-shft: #4ade80;
+    --hold-text: #9aa7c7;
+    --danger-bg: #3b1c24;
+    --danger-border: #ef4444;
+    --danger-text: #fca5a5;
+    --bt-bg: #182b3a;
+    --bt-border: #38bdf8;
+    --bt-text: #7dd3fc;
+    --resync-bg: #291f3d;
+    --resync-border: #a855f7;
+    --resync-text: #d8b4fe;
+  }
+
+  body.light {
+    --bg: #f3f5f9;
+    --surface: #ffffff;
+    --surface-border: #dce1ec;
+    --key-bg: #f8f9fc;
+    --key-border: #cbd3e3;
+    --key-empty-bg: #f1f3f8;
+    --key-empty-border: #e2e7f0;
+    --key-held-bg: #dbeafe;
+    --key-held-border: #3b82f6;
+    --text: #182032;
+    --text-muted: #64708a;
+    --text-dim: #a0abbf;
+    --accent-en: #2563eb;
+    --accent-ru: #9333ea;
+    --accent-sym: #16a34a;
+    --accent-sym-ru: #0d9488;
+    --accent-nav: #d97706;
+    --accent-ctrl: #dc2626;
+    --combo-bg: #e0ecff;
+    --combo-border: #60a5fa;
+    --combo-text: #1d4ed8;
+    --combo-shared-bg: #d1fae5;
+    --combo-shared-border: #10b981;
+    --combo-shared-text: #047857;
+    --mod-gui: #db2777;
+    --mod-alt: #0284c7;
+    --mod-ctrl: #d97706;
+    --mod-shft: #16a34a;
+    --hold-text: #5a6682;
+    --danger-bg: #fee2e2;
+    --danger-border: #ef4444;
+    --danger-text: #b91c1c;
+    --bt-bg: #e0f2fe;
+    --bt-border: #0284c7;
+    --bt-text: #0369a1;
+    --resync-bg: #f3e8ff;
+    --resync-border: #9333ea;
+    --resync-text: #7e22ce;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 16px 20px 24px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  header {
+    max-width: 1480px;
+    margin: 0 auto 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .title-block {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  h1 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tab-group {
+    display: inline-flex;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 9px;
+    padding: 3px;
+    gap: 2px;
+  }
+
+  button {
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    padding: 5px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  button:hover { color: var(--text); }
+
+  button.active {
+    background: var(--key-bg);
+    color: var(--text);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-outline {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    color: var(--text);
+    padding: 6px 11px;
+    border-radius: 8px;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--key-border);
+  }
+
+  .legend {
+    max-width: 1480px;
+    margin: 0 auto 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+    font-size: 11.5px;
+    color: var(--text-muted);
+  }
+
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .pill-sample {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    background: var(--combo-bg);
+    border: 1px solid var(--combo-border);
+    color: var(--combo-text);
+  }
+
+  .pill-sample.shared {
+    background: var(--combo-shared-bg);
+    border-color: var(--combo-shared-border);
+    color: var(--combo-shared-text);
+  }
+
+  .mod-dot {
+    font-weight: 700;
+    font-size: 11px;
+  }
+
+  .grid {
+    max-width: 1480px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .grid.focus-mode {
+    grid-template-columns: 1fr;
+    max-width: 980px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 14px;
+    padding: 12px 15px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .card.full-width {
+    grid-column: 1 / -1;
+  }
+
+  .card.hidden {
+    display: none;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .layer-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+  }
+
+  .layer-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+
+  .layer-trigger {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  .board-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  svg.board {
+    width: 100%;
+    height: auto;
+    max-width: 680px;
+    display: block;
+    user-select: none;
+  }
+
+  .focus-mode svg.board {
+    max-width: 920px;
+  }
+
+  .bt-guide {
+    margin-top: 4px;
+    background: var(--key-empty-bg);
+    border: 1px solid var(--surface-border);
+    border-radius: 10px;
+    padding: 9px 12px;
+    font-size: 11.5px;
+    line-height: 1.48;
+    color: var(--text-muted);
+  }
+
+  .bt-guide strong { color: var(--text); }
+
+  @media (max-width: 1020px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  body.wallpaper header,
+  body.wallpaper .legend {
+    display: none;
+  }
+  body.wallpaper {
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .exit-wallpaper {
+    display: none;
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+    opacity: 0.45;
+    z-index: 99;
+  }
+  .exit-wallpaper:hover { opacity: 1; }
+  body.wallpaper .exit-wallpaper { display: inline-block; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title-block">
+    <h1>Ferris Sweep — ZMK Cheatsheet</h1>
+    <span class="subtitle">34 keys · Unified EN/RU Punctuation · Keys 1–6 / 0 · W Wallpaper · T Theme</span>
+  </div>
+  <div class="controls">
+    <div class="tab-group" id="viewTabs">
+      <button class="active" data-view="all">All</button>
+      <button data-view="en">1 · EN</button>
+      <button data-view="ru">2 · RU</button>
+      <button data-view="sym_en">3 · SYM EN</button>
+      <button data-view="sym_ru">4 · SYM RU</button>
+      <button data-view="nav">5 · NAV</button>
+      <button data-view="ctrl">6 · CTRL</button>
+    </div>
+    <button class="btn-outline" id="btnWallpaper" title="Hide toolbar (W)">Wallpaper Mode</button>
+    <button class="btn-outline" id="btnTheme" title="Toggle theme (T)">Light / Dark</button>
+  </div>
+</header>
+
+<div class="legend">
+  <span class="legend-item"><span class="pill-sample shared">!</span> Shared EN+RU vertical combo</span>
+  <span class="legend-item"><span class="pill-sample">Q</span> Layer-specific vertical combo</span>
+  <span class="legend-item"><span class="mod-dot" style="color:var(--mod-gui)">⌘</span> GUI</span>
+  <span class="legend-item"><span class="mod-dot" style="color:var(--mod-alt)">⌥</span> Alt</span>
+  <span class="legend-item"><span class="mod-dot" style="color:var(--mod-ctrl)">⌃</span> Ctrl</span>
+  <span class="legend-item"><span class="mod-dot" style="color:var(--mod-shft)">⇧</span> Shift (cross-hand balanced)</span>
+  <span class="legend-item"><span>▽</span> Transparent</span>
+  <span class="legend-item"><span>—</span> Disabled</span>
+</div>
+
+<main class="grid" id="grid"></main>
+<button class="btn-outline exit-wallpaper" id="btnExitWallpaper">Exit Wallpaper (Esc / W)</button>
+
+<script>
+const KEY_W = 54;
+const KEY_H = 50;
+const COL_GAP = 6;
+const ROW_GAP = 6;
+const SPLIT_GAP = 64;
+
+const COL_STAGGER = [24, 10, 0, 7, 13];
+
+function getKeyPos(idx) {
+  const leftStartX = 14;
+  const topStartY = 14;
+  const colStep = KEY_W + COL_GAP;
+  const rowStep = KEY_H + ROW_GAP;
+  const rightStartX = leftStartX + 5 * colStep + SPLIT_GAP;
+
+  if (idx < 30) {
+    const row = Math.floor(idx / 10);
+    const col = idx % 10;
+    const isRight = col >= 5;
+    const localCol = isRight ? col - 5 : col;
+    const staggerIdx = isRight ? (4 - localCol) : localCol;
+    const x = (isRight ? rightStartX : leftStartX) + localCol * colStep;
+    const y = topStartY + row * rowStep + COL_STAGGER[staggerIdx];
+    return { x, y, angle: 0 };
+  }
+
+  const thumbBaseY = topStartY + 3 * rowStep + 16;
+  if (idx === 30) return { x: leftStartX + 3.15 * colStep, y: thumbBaseY, angle: 6 };
+  if (idx === 31) return { x: leftStartX + 4.20 * colStep, y: thumbBaseY + 8, angle: 14 };
+  if (idx === 32) return { x: rightStartX - 0.20 * colStep, y: thumbBaseY + 8, angle: -14 };
+  if (idx === 33) return { x: rightStartX + 0.85 * colStep, y: thumbBaseY, angle: -6 };
+}
+
+const MOD_META = {
+  GUI:  { sym: "⌘", color: "var(--mod-gui)" },
+  ALT:  { sym: "⌥", color: "var(--mod-alt)" },
+  CTRL: { sym: "⌃", color: "var(--mod-ctrl)" },
+  SHFT: { sym: "⇧", color: "var(--mod-shft)" },
+};
+
+const SHARED_PUNC_COMBOS = [
+  { keys: [5, 15], label: "!", shared: true },
+  { keys: [6, 16], label: ":", shared: true },
+  { keys: [7, 17], label: "\"", shared: true },
+  { keys: [8, 18], label: "(", shared: true },
+  { keys: [9, 19], label: ")", shared: true },
+  { keys: [15, 25], label: "-", shared: true },
+  { keys: [16, 26], label: "=", shared: true },
+  { keys: [17, 27], label: ",", shared: true },
+  { keys: [18, 28], label: ".", shared: true },
+  { keys: [19, 29], label: "?", shared: true },
+];
+
+const LAYERS = [
+  {
+    id: "en",
+    name: "Layer 0 · EN",
+    accent: "var(--accent-en)",
+    trigger: "Default · Right combos = shared EN/RU punctuation",
+    keys: [
+      { tap: "W" }, { tap: "B" }, { tap: "G" }, { tap: "L" }, { tap: "M" },
+      { tap: "X" }, { tap: "F" }, { tap: "O" }, { tap: "Y" }, { tap: "'" },
+
+      { tap: "R", mod: "GUI" }, { tap: "N", mod: "ALT" }, { tap: "S", mod: "CTRL" }, { tap: "T", mod: "SHFT" }, { tap: "D" },
+      { tap: "U" }, { tap: "A", mod: "SHFT" }, { tap: "E", mod: "CTRL" }, { tap: "I", mod: "ALT" }, { tap: "H", mod: "GUI" },
+
+      { tap: "Z" }, { tap: "P" }, { tap: "C" }, { tap: "V" }, { tap: "K" },
+      { tap: "-" }, { tap: ";" }, { tap: "," }, { tap: "." }, { tap: "/" },
+
+      { tap: "ESC", hold: "SYM EN", accent: "var(--accent-sym)" }, { tap: "SPACE" },
+      { tap: "BSPC" }, { tap: "ENT", hold: "NAV", accent: "var(--accent-nav)" },
+    ],
+    combos: [
+      { keys: [0, 10], label: "TAB", shared: true },
+      { keys: [1, 11], label: "@" },
+      { keys: [3, 13], label: "J" },
+      { keys: [10, 20], label: "~" },
+      { keys: [11, 21], label: "Q" },
+      { keys: [13, 23], label: "^" },
+      { keys: [14, 24], label: "RU/EN", shared: true },
+      ...SHARED_PUNC_COMBOS,
+    ]
+  },
+  {
+    id: "ru",
+    name: "Layer 1 · RU (ЙЦУКЕН)",
+    accent: "var(--accent-ru)",
+    trigger: "Combo D+K / М+Ж · Identical right-hand punctuation combos",
+    keys: [
+      { tap: "З" }, { tap: "Б" }, { tap: "Д" }, { tap: "Р" }, { tap: "Г" },
+      { tap: "Ю" }, { tap: "У" }, { tap: "А" }, { tap: "П" }, { tap: "Ь" },
+
+      { tap: "С", mod: "GUI" }, { tap: "Т", mod: "ALT" }, { tap: "К", mod: "CTRL" }, { tap: "Н", mod: "SHFT" }, { tap: "М" },
+      { tap: "Й" }, { tap: "Е", mod: "SHFT" }, { tap: "О", mod: "CTRL" }, { tap: "В", mod: "ALT" }, { tap: "И", mod: "GUI" },
+
+      { tap: "Ш" }, { tap: "Х" }, { tap: "Ч" }, { tap: "Л" }, { tap: "Ж" },
+      { tap: "Ё" }, { tap: "Я" }, { tap: "Ы" }, { tap: "Ф" }, { tap: "Э" },
+
+      { tap: "ESC", hold: "SYM RU", accent: "var(--accent-sym-ru)" }, { tap: "SPACE", subtle: true },
+      { tap: "BSPC", subtle: true }, { tap: "ENT", hold: "NAV", accent: "var(--accent-nav)", subtle: true },
+    ],
+    combos: [
+      { keys: [0, 10], label: "TAB", shared: true },
+      { keys: [1, 11], label: "Ц" },
+      { keys: [2, 12], label: "Щ" },
+      { keys: [11, 21], label: "Ъ" },
+      { keys: [14, 24], label: "EN/RU", shared: true },
+      ...SHARED_PUNC_COMBOS,
+    ]
+  },
+  {
+    id: "sym_en",
+    name: "Layer 2 · SYM EN",
+    accent: "var(--accent-sym)",
+    trigger: "Hold Left Outer Thumb on EN",
+    keys: [
+      { tap: "\\" }, { tap: "#" }, { tap: "{" }, { tap: "}" }, { tap: "|" },
+      { tap: "." }, { tap: "(" }, { tap: ")" }, { tap: "," }, { tap: "$" },
+
+      { tap: "[", mod: "GUI" }, { tap: "]", mod: "ALT" }, { tap: "%", mod: "CTRL" }, { tap: "\"", mod: "SHFT" }, { tap: "`" },
+      { tap: ":" }, { tap: "_", mod: "SHFT" }, { tap: "*", mod: "CTRL" }, { tap: "?", mod: "ALT" }, { tap: "'", mod: "GUI" },
+
+      { tap: ";" }, { tap: "&" }, { tap: "!" }, { tap: "~" }, { tap: "=" },
+      { tap: "-" }, { tap: "/" }, { tap: "+" }, { tap: "<" }, { tap: ">" },
+
+      { tap: "SYM EN", held: true, small: true }, { tap: "SPACE", subtle: true },
+      { tap: "BSPC", subtle: true }, { tap: "+CTRL", hold: "Hold both", accent: "var(--accent-ctrl)" },
+    ],
+    combos: [
+      { keys: [15, 25], label: "^" },
+      { keys: [17, 27], label: "@" },
+    ]
+  },
+  {
+    id: "sym_ru",
+    name: "Layer 3 · SYM RU (ЙЦУКЕН)",
+    accent: "var(--accent-sym-ru)",
+    trigger: "Hold Left Outer Thumb on RU · Same positions as SYM EN",
+    keys: [
+      { tap: "\\" }, { tap: "№" }, { empty: true }, { empty: true }, { empty: true },
+      { tap: "." }, { tap: "(" }, { tap: ")" }, { tap: "," }, { empty: true },
+
+      { tap: "⌘", subtle: true }, { tap: "⌥", subtle: true }, { tap: "%", mod: "CTRL" }, { tap: "\"", mod: "SHFT" }, { empty: true },
+      { tap: ":" }, { tap: "_", mod: "SHFT" }, { tap: "*", mod: "CTRL" }, { tap: "?", mod: "ALT" }, { tap: "⌘", subtle: true },
+
+      { tap: ";" }, { empty: true }, { tap: "!" }, { empty: true }, { tap: "=" },
+      { tap: "-" }, { tap: "/" }, { tap: "+" }, { empty: true }, { empty: true },
+
+      { tap: "SYM RU", held: true, small: true }, { tap: "SPACE", subtle: true },
+      { tap: "BSPC", subtle: true }, { tap: "+CTRL", hold: "Hold both", accent: "var(--accent-ctrl)" },
+    ],
+    combos: []
+  },
+  {
+    id: "nav",
+    name: "Layer 4 · NAV / NUM",
+    accent: "var(--accent-nav)",
+    trigger: "Hold Right Outer Thumb (ENT)",
+    keys: [
+      { trans: true }, { tap: "1" }, { tap: "2" }, { tap: "3" }, { trans: true },
+      { tap: "PgUp", small: true }, { tap: "Home", small: true }, { tap: "↑" }, { tap: "End", small: true }, { tap: "Del", small: true },
+
+      { trans: true, mod: "GUI" }, { tap: "4" }, { tap: "5" }, { tap: "6" }, { trans: true },
+      { tap: "PgDn", small: true }, { tap: "←" }, { tap: "↓" }, { tap: "→" }, { tap: "Bspc", small: true },
+
+      { trans: true }, { tap: "7" }, { tap: "8" }, { tap: "9" }, { trans: true },
+      { trans: true }, { trans: true }, { trans: true }, { trans: true }, { trans: true },
+
+      { tap: "+CTRL", hold: "Hold both", accent: "var(--accent-ctrl)" }, { tap: "0" },
+      { tap: "BSPC", subtle: true }, { tap: "NAV", held: true },
+    ],
+    combos: []
+  },
+  {
+    id: "ctrl",
+    name: "Layer 5 · CONTROL (System & Bluetooth)",
+    accent: "var(--accent-ctrl)",
+    trigger: "Hold BOTH Outer Thumbs (ESC + ENT)",
+    keys: [
+      { tap: "Reset", small: true }, { tap: "BT 0", small: true, kind: "bt" }, { tap: "BT 1", small: true, kind: "bt" }, { tap: "BT 2", small: true, kind: "bt" }, { tap: "BT 3", small: true, kind: "bt" },
+      { empty: true }, { empty: true }, { empty: true }, { tap: "Reset", small: true }, { tap: "BT Nxt", small: true, kind: "bt" },
+
+      { tap: "Boot", small: true }, { tap: "Resync", hold: "EN/RU", small: true, kind: "resync" }, { empty: true }, { empty: true }, { empty: true },
+      { empty: true }, { empty: true }, { empty: true }, { tap: "Boot", small: true }, { tap: "BT Prv", small: true, kind: "bt" },
+
+      { tap: "Studio", small: true }, { empty: true }, { empty: true }, { empty: true }, { empty: true },
+      { empty: true }, { empty: true }, { empty: true }, { tap: "Studio", small: true }, { tap: "BT Clr", small: true, kind: "danger" },
+
+      { tap: "HOLD", held: true }, { empty: true },
+      { empty: true }, { tap: "HOLD", held: true },
+    ],
+    combos: [],
+    footerHtml: `
+      <div class="bt-guide">
+        <strong>Pair new PC:</strong> Hold both outer thumbs → tap a free <strong>BT 0–3</strong> (or <strong>BT Nxt</strong>) → pair <em>Cradio</em> in OS Bluetooth settings.
+        <strong>BT Clr</strong> clears only the active slot. <strong>Resync</strong> flips EN/RU layer without sending ⌘Space.
+      </div>
+    `
+  }
+];
+
+function escapeXml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function renderBoardSvg(layer) {
+  const width = 686;
+  const height = 276;
+  let parts = [];
+
+  layer.keys.forEach((k, idx) => {
+    const pos = getKeyPos(idx);
+    const cx = pos.x + KEY_W / 2;
+    const cy = pos.y + KEY_H / 2;
+    const transform = pos.angle ? ` transform="rotate(${pos.angle} ${cx} ${cy})"` : "";
+
+    let fill = "var(--key-bg)";
+    let stroke = "var(--key-border)";
+    let strokeWidth = 1.25;
+    let textColor = "var(--text)";
+
+    if (k.empty || k.trans) {
+      fill = "var(--key-empty-bg)";
+      stroke = "var(--key-empty-border)";
+      textColor = "var(--text-dim)";
+    } else if (k.held) {
+      fill = "var(--key-held-bg)";
+      stroke = "var(--key-held-border)";
+      strokeWidth = 1.8;
+    } else if (k.kind === "danger") {
+      fill = "var(--danger-bg)";
+      stroke = "var(--danger-border)";
+      textColor = "var(--danger-text)";
+    } else if (k.kind === "bt") {
+      fill = "var(--bt-bg)";
+      stroke = "var(--bt-border)";
+      textColor = "var(--bt-text)";
+    } else if (k.kind === "resync") {
+      fill = "var(--resync-bg)";
+      stroke = "var(--resync-border)";
+      textColor = "var(--resync-text)";
+    } else if (k.subtle) {
+      textColor = "var(--text-muted)";
+    }
+
+    parts.push(`<g${transform}>`);
+    parts.push(
+      `<rect x="${pos.x}" y="${pos.y}" width="${KEY_W}" height="${KEY_H}" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}" />`
+    );
+
+    const label = k.empty ? "—" : (k.trans ? "▽" : k.tap);
+    const hasBottom = Boolean(k.mod || k.hold);
+    const mainY = hasBottom ? pos.y + 21 : pos.y + 30;
+    const fontSize = k.small || (label && label.length >= 4) ? 11.5 : (label && label.length === 3 ? 13.5 : 16.5);
+    const fontWeight = (k.empty || k.trans) ? 500 : 700;
+
+    parts.push(
+      `<text x="${cx}" y="${mainY}" text-anchor="middle" fill="${textColor}" font-size="${fontSize}" font-weight="${fontWeight}">${escapeXml(label)}</text>`
+    );
+
+    if (k.mod) {
+      const m = MOD_META[k.mod];
+      parts.push(
+        `<text x="${cx}" y="${pos.y + 40}" text-anchor="middle" fill="${m.color}" font-size="11.5" font-weight="700">${m.sym}</text>`
+      );
+    } else if (k.hold) {
+      const hColor = k.accent || "var(--hold-text)";
+      parts.push(
+        `<text x="${cx}" y="${pos.y + 40}" text-anchor="middle" fill="${hColor}" font-size="9.5" font-weight="700">${escapeXml(k.hold)}</text>`
+      );
+    }
+
+    parts.push(`</g>`);
+  });
+
+  layer.combos.forEach((c) => {
+    const p1 = getKeyPos(c.keys[0]);
+    const p2 = getKeyPos(c.keys[1]);
+    const mx = (p1.x + p2.x) / 2 + KEY_W / 2;
+    const my = (p1.y + p2.y) / 2 + KEY_H / 2;
+    const pillW = Math.max(24, c.label.length * 7.2 + 12);
+    const pillH = 18;
+    const bg = c.shared ? "var(--combo-shared-bg)" : "var(--combo-bg)";
+    const bd = c.shared ? "var(--combo-shared-border)" : "var(--combo-border)";
+    const tx = c.shared ? "var(--combo-shared-text)" : "var(--combo-text)";
+
+    parts.push(
+      `<g>
+        <rect x="${mx - pillW / 2}" y="${my - pillH / 2}" width="${pillW}" height="${pillH}" rx="9"
+              fill="${bg}" stroke="${bd}" stroke-width="1.2" />
+        <text x="${mx}" y="${my + 4}" text-anchor="middle" fill="${tx}"
+              font-size="10.5" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">${escapeXml(c.label)}</text>
+      </g>`
+    );
+  });
+
+  return `<svg class="board" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">${parts.join("")}</svg>`;
+}
+
+const grid = document.getElementById("grid");
+
+LAYERS.forEach((layer) => {
+  const card = document.createElement("section");
+  card.className = "card";
+  card.dataset.layer = layer.id;
+
+  card.innerHTML = `
+    <div class="card-header">
+      <div class="layer-title">
+        <span class="layer-dot" style="background:${layer.accent}"></span>
+        <span>${layer.name}</span>
+      </div>
+      <span class="layer-trigger">${layer.trigger}</span>
+    </div>
+    <div class="board-wrap">${renderBoardSvg(layer)}</div>
+    ${layer.footerHtml || ""}
+  `;
+
+  grid.appendChild(card);
+});
+
+const tabs = document.querySelectorAll("#viewTabs button");
+const cards = document.querySelectorAll(".card");
+
+function setView(view) {
+  tabs.forEach((b) => b.classList.toggle("active", b.dataset.view === view));
+  const isAll = view === "all";
+  grid.classList.toggle("focus-mode", !isAll);
+  cards.forEach((c) => {
+    c.classList.toggle("hidden", !isAll && c.dataset.layer !== view);
+  });
+}
+
+tabs.forEach((b) => b.addEventListener("click", () => setView(b.dataset.view)));
+document.getElementById("btnTheme").addEventListener("click", () => document.body.classList.toggle("light"));
+
+function toggleWallpaper(force) {
+  document.body.classList.toggle("wallpaper", force);
+}
+document.getElementById("btnWallpaper").addEventListener("click", () => toggleWallpaper(true));
+document.getElementById("btnExitWallpaper").addEventListener("click", () => toggleWallpaper(false));
+
+window.addEventListener("keydown", (e) => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const map = { "0": "all", "1": "en", "2": "ru", "3": "sym_en", "4": "sym_ru", "5": "nav", "6": "ctrl" };
+  if (map[e.key]) setView(map[e.key]);
+  if (e.key.toLowerCase() === "w") toggleWallpaper();
+  if (e.key === "Escape") toggleWallpaper(false);
+  if (e.key.toLowerCase() === "t") document.body.classList.toggle("light");
+});
+</script>
+</body>
+</html>
